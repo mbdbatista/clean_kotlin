@@ -15,7 +15,7 @@ class CategoryAPI(
     val createOperator: CreateCategoryOperator,
     ) {
     @GetMapping("/category/{id}")
-    fun get(@PathVariable id: Number): GetCategoryOutput {
+    fun get(@PathVariable id: Int): GetCategoryOutput {
         val input = GetCategoryInput(id)
         return getOperator.run(input)
     }

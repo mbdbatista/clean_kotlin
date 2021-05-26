@@ -7,7 +7,7 @@ import src.domain.types.CategoryType
 
 @Component
 class GetCategoryUseCase(private val categoryRepository: ICategoryRepository) {
-    fun exec(id: Number): CategoryType {
+    fun exec(id: Int): CategoryType {
         val category = this.categoryRepository.findById(id)
         if (category.isEmpty) {
             throw CategoryNotFound()
