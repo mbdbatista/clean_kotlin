@@ -1,26 +1,22 @@
 package src.framework.database.models
 
 import src.domain.entities.Category
-import src.domain.types.CategoryType
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
-
-@Entity(name = "Category")
-class CategoryEntity() : CategoryType() {
-
-    constructor(name: String): this() {
-        this.name = name
-    }
-
+@Table(name = "categoria")
+@Entity
+data class CategoryEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Int = 0
-    override lateinit var name: String
+    @Column(name = "id_categoria")
+    val id: Int? = 0,
 
-    fun toCategory(): Category {
-        return Category(this.id, this.name)
-    }
-}
+    @Column(nullable = false, name = "nome")
+    val name: String? = "",
+
+    @OneToMany(mappedBy = "categoria", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    val subCategories: List<SubCategoryEntity> = emptyList()
+)
+
+fun CategoryEntity.toCategory() = Category(this.id!!, this.name!!)
+fun Category.toCategoryEntity() = CategoryEntity(this.id, this.name)

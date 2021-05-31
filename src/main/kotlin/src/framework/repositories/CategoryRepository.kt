@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository
 import src.business.repositories.ICategoryRepository
 import src.domain.entities.Category
 import src.framework.database.models.CategoryEntity
+import src.framework.database.models.toCategory
 import src.framework.database.operators.ICategoryOperator
 import java.util.*
 

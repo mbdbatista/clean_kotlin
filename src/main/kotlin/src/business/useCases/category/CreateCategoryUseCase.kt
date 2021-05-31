@@ -3,11 +3,11 @@ package src.business.useCases.category
 import org.springframework.stereotype.Component
 import src.business.errors.category.CategoryAlreadyRegistered
 import src.business.repositories.ICategoryRepository
-import src.domain.types.CategoryType
+import src.domain.entities.Category
 
 @Component
 class CreateCategoryUseCase(private val categoryRepository: ICategoryRepository) {
-    fun exec(name: String): CategoryType {
+    fun exec(name: String): Category {
         val category = this.categoryRepository.findByName(name)
         if (category != null) {
             throw CategoryAlreadyRegistered()

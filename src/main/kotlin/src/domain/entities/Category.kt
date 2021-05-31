@@ -1,11 +1,3 @@
 package src.domain.entities
 
-import src.domain.types.CategoryType
-
-
-class Category private constructor(): CategoryType() {
-    constructor(id: Int, name: String): this() {
-        this.id = id
-        this.name = name
-    }
-}
+data class Category (val id: Int, val name: String, val subCategories: List<SubCategory> = emptyList())
