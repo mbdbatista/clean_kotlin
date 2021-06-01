@@ -13,22 +13,21 @@ data class SubCategoryEntity(
     @Column(nullable = false, name = "nome")
     val name: String? = "",
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_categoria")
-    val category: CategoryEntity? = null,
+    @Column(name = "id_categoria")
+    val category: Int? = 0,
 
-    @OneToMany(mappedBy = "lancamento", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "subCategory", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val entries: List<EntryEntity> = emptyList()
 )
 
 fun SubCategoryEntity.toSubCategory() = SubCategory(
     id = this.id!!,
     name = this.name!!,
-    category = this.category!!.toCategory()
+    category = this.category!!
 )
 
 fun SubCategory.toSubCategoryEntity() = SubCategoryEntity(
     id = this.id,
     name = this.name,
-    category = this.category!!.toCategoryEntity()
+    category = this.category
 )

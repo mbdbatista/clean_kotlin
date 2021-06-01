@@ -1,6 +1,7 @@
 package src.framework.database.models
 
 import src.domain.entities.Category
+import src.domain.entities.SubCategory
 import javax.persistence.*
 
 @Table(name = "categoria")
@@ -14,9 +15,11 @@ data class CategoryEntity(
     @Column(nullable = false, name = "nome")
     val name: String? = "",
 
-    @OneToMany(mappedBy = "categoria", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val subCategories: List<SubCategoryEntity> = emptyList()
 )
 
-fun CategoryEntity.toCategory() = Category(this.id!!, this.name!!)
-fun Category.toCategoryEntity() = CategoryEntity(this.id, this.name)
+fun CategoryEntity.toCategory(): Category {
+    return Category(this.id!!, this.name!!, this.subCategories.map { it.toSubCategory() })
+}
+fun Category.toCategoryEntity() = CategoryEntity(this.id, this.name, this.subCategories.map { it.toSubCategoryEntity() })

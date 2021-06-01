@@ -21,9 +21,8 @@ data class EntryEntity(
     @Column(nullable = false, name = "comentario")
     val comment: String? = "",
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_subcategoria")
-    val subCategory: SubCategoryEntity? = null
+    @Column(name = "id_subcategoria")
+    val subCategory: Int? = null
 )
 
 fun EntryEntity.toEntry() =
@@ -32,7 +31,7 @@ fun EntryEntity.toEntry() =
         value = this.value!!,
         date = this.date!!,
         comment = this.comment!!,
-        subCategory = if(this.subCategory != null) this.subCategory.toSubCategory() else null
+        subCategory = this.subCategory
     )
 
 fun Entry.toEntryEntity() =
@@ -41,5 +40,5 @@ fun Entry.toEntryEntity() =
         value = this.value,
         date = this.date,
         comment = this.comment,
-        subCategory = if(this.subCategory != null) this.subCategory.toSubCategoryEntity() else null
+        subCategory = this.subCategory
     )

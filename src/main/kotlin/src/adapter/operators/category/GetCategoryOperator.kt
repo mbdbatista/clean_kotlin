@@ -1,20 +1,14 @@
 package src.adapter.operators.category
 
 import org.springframework.stereotype.Component
-import src.adapter.serializers.base.BaseError
-import src.adapter.serializers.category.get.GetCategoryInput
-import src.adapter.serializers.category.get.GetCategoryOutput
-import src.business.errors.base.DomainError
+import src.adapter.dto.CategoryDto
+import src.adapter.dto.toCategoryDto
 import src.business.useCases.category.GetCategoryUseCase
 
 @Component
 class GetCategoryOperator(private val getCategoryUseCase: GetCategoryUseCase) {
-    fun run(input: GetCategoryInput): GetCategoryOutput {
-        return try {
-            val message = this.getCategoryUseCase.exec(input.id)
-            GetCategoryOutput(data = message)
-        } catch (error: DomainError) {
-            GetCategoryOutput(error = BaseError(error.code, error.message))
-        }
+    fun run(id: Int): CategoryDto {
+        val message = this.getCategoryUseCase.exec(id)
+        return message.toCategoryDto()
     }
 }
