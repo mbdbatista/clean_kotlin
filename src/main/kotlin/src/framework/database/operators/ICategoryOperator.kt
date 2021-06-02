@@ -5,5 +5,5 @@ import src.framework.database.models.CategoryEntity
 
 interface ICategoryOperator: JpaRepository<CategoryEntity, Number> {
     fun findByName(name: String): CategoryEntity?
-    fun findAllByNameContainingOrNameIsNull(name: String): List<CategoryEntity>
+    fun findAllByNameContainingOrNameIsNull(name: String?): List<CategoryEntity>
 }

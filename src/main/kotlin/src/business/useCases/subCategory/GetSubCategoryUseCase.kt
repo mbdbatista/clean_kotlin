@@ -8,6 +8,6 @@ import src.domain.entities.SubCategory
 @Component
 class GetSubCategoryUseCase(private val subCategoryRepository: ISubCategoryRepository) {
     fun exec(id: Int): SubCategory {
-        return this.subCategoryRepository.findById(id) ?: throw NotFound("Category Not Found")
+        return this.subCategoryRepository.findById(id) ?: throw NotFound("Sub Category Not Found")
     }
 }

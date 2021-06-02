@@ -26,7 +26,7 @@ class CategoryRepository(private val categoryDB: ICategoryOperator): ICategoryRe
         return categoryDB.save(CategoryEntity(name = name)).toCategory()
     }
 
-    override fun findAllByName(name: String): List<Category> {
+    override fun findAllByName(name: String?): List<Category> {
         return categoryDB.findAllByNameContainingOrNameIsNull(name).map { it.toCategory() }
     }
 

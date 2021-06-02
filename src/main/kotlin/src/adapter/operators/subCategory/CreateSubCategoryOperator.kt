@@ -9,8 +9,8 @@ import src.business.useCases.subCategory.CreateSubCategoryUseCase
 class CreateSubCategoryOperator(
     val createSubCategoryUseCase: CreateSubCategoryUseCase
 ) {
-    fun run(name: String, category: Int): SubCategoryDto {
-        val message = this.createSubCategoryUseCase.exec(name, category)
+    fun run(input: SubCategoryDto): SubCategoryDto {
+        val message = this.createSubCategoryUseCase.exec(input.name, input.categoryId)
         return message.toSubCategoryDto()
     }
 }

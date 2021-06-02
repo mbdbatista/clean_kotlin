@@ -5,4 +5,5 @@ import src.framework.database.models.SubCategoryEntity
 
 interface ISubCategoryOperator: JpaRepository<SubCategoryEntity, Int> {
     fun findByName(name: String): SubCategoryEntity?
+    fun findByNameOrIdOrNameIsNullOrIdIsNull(name: String?, id: Int?): List<SubCategoryEntity>
 }
